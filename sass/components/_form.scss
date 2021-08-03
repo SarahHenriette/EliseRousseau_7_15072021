@@ -1,0 +1,21 @@
+.form {
+    margin-top: 4%;
+    position: relative;
+    &-search {
+        background-color: #E7E7E7;   
+        height: 69px; 
+        border: none; 
+    }
+    &-search:focus {
+        background-color: #E7E7E7;   
+        border: none; 
+        box-shadow: none;
+    }
+    &-btnSubmit {
+        position: absolute;
+        right: 0;
+        height: 100%;
+        border: none;
+        background-color:  #E7E7E7;
+    }
+}

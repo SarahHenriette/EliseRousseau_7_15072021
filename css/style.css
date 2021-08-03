@@ -41,7 +41,7 @@
 }
 .container .filters .filter {
   margin-right: 3%;
-  min-width: 170px;
+  min-width: auto;
   min-height: 69px;
   width: 170px;
   display: flex;
@@ -124,7 +124,6 @@
   height: 100px;
   overflow: hidden;
 }
-
 @media only screen and (max-width: 1383px) and (min-width: 800px) {
   .container .listCard .card {
     width: 45%;
@@ -137,9 +136,6 @@
   }
 }
 @media only screen and (max-width: 799px) and (min-width: 300px) {
-  .container .listCard {
-    justify-content: center;
-  }
   .container .listCard .card {
     width: 100%;
   }
@@ -151,6 +147,12 @@
   }
   .container .listCard .card-time {
     text-align: start;
+  }
+}
+
+@media only screen and (max-width: 799px) and (min-width: 300px) {
+  .container .listCard {
+    justify-content: center;
   }
 }
 
