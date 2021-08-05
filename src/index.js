@@ -1,6 +1,6 @@
 import recipes from "./../recipes"
 import CreateCardRecipe from "./CreateCardRecipe"
-let principalSearchBar = document.getElementById('principal-search')
+import SearchPrincipalBar from "./SearchPrincipalBar"
 
 console.log(recipes)
 
@@ -8,5 +8,8 @@ console.log(recipes)
 for (const recipe of recipes) {
     new CreateCardRecipe(recipe)
 }
+
+new SearchPrincipalBar(recipes)
+
 
 
