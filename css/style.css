@@ -51,6 +51,7 @@
 .container .filters .filter input {
   background-color: transparent;
   color: white;
+  border: none;
 }
 .container .filters .filter input::placeholder {
   color: white;
@@ -85,8 +86,10 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  padding-bottom: 5%;
 }
 .container .listCard .card {
+  display: none;
   width: 380px;
   height: auto;
   background-color: #E7E7E7;
@@ -102,9 +105,6 @@
 .container .listCard .card-title, .container .listCard .card-time, .container .listCard .card-ingredients {
   font-family: "Lato", sans-serif;
 }
-.container .listCard .card-title, .container .listCard .card-time {
-  font-size: 1em;
-}
 .container .listCard .card-description, .container .listCard .card-ingredients {
   font-size: 0.7em;
 }
@@ -117,12 +117,28 @@
 .container .listCard .card-ingredients li {
   list-style-type: none;
 }
+.container .listCard .card-ingredients_name::after {
+  content: " : ";
+}
+.container .listCard .card-title {
+  font-size: 1.2em;
+}
 .container .listCard .card-time {
+  font-size: 1em;
   text-align: end;
+}
+.container .listCard .card-time::before {
+  content: url("../../img/icon-time.png");
+  padding-right: 5px;
+  position: relative;
+  top: 5px;
 }
 .container .listCard .card-description {
   height: 100px;
   overflow: hidden;
+}
+.container .listCard .card.active {
+  display: block;
 }
 @media only screen and (max-width: 1383px) and (min-width: 800px) {
   .container .listCard .card {

@@ -1,7 +1,8 @@
 .card {
+    display: none;
     width: 380px;
     height: auto;
-    background-color:#E7E7E7;            ;
+    background-color:#E7E7E7;          
     padding: 0;
     margin-top: 2em;
     border: none;
@@ -19,10 +20,6 @@
         font-family: $fontLato;
     }
 
-    &-title, &-time {
-        font-size: 1em;
-    }
-
     &-description, &-ingredients {
         font-size: 0.7em;
     }
@@ -36,16 +33,35 @@
         li {
             list-style-type: none;
         }
+        &_name::after {
+            content: " : "
+        }
+    }
+
+    &-title {
+        font-size: 1.2em;    
     }
 
     &-time {
+        font-size: 1em;
         text-align: end;
+    }
+
+    &-time::before {
+        content:url("../../img/icon-time.png");
+        padding-right: 5px;
+        position: relative;
+        top: 5px;
     }
 
     &-description {
         height: 100px;
         overflow: hidden;
     }
+}
+
+.card.active{
+    display: block;
 }
 
 @media only screen and (max-width: 1383px) and (min-width: 800px) {

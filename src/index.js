@@ -1,16 +1,12 @@
-// import retrieveContent from './query.js';
+import recipes from "./../recipes"
+import CreateCardRecipe from "./CreateCardRecipe"
+let principalSearchBar = document.getElementById('principal-search')
 
-// async function showContent() {
-//   try {
-//     const content = await retrieveContent();
+console.log(recipes)
 
-//     let elt = document.createElement('div');
-//     elt.innerHTML = content.join('<br />');
+//création des cards des recettes
+for (const recipe of recipes) {
+    new CreateCardRecipe(recipe)
+}
 
-//     document.getElementsByTagName('body')[0].appendChild(elt);
-//   } catch (e) {
-//     console.log('Error', e);
-//   }
-// }
 
-// showContent();
