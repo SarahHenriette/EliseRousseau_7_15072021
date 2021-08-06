@@ -59,6 +59,7 @@ export default class CreateCardRecipe {
     addAttributeAtElementCard() {
         // this.cardBodyRowNameTimePImg.setAttribute("src", "img/icon-time.png")
         // this.cardBodyRowNameTimePImg.setAttribute("alt", "")
+        this.card.setAttribute("id", this.recipe.id)
     }
 
     addTextContentAtElementCard() {
