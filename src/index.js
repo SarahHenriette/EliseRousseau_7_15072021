@@ -8,3 +8,4 @@ for (const recipe of recipes) {
 }
 
 new SearchPrincipalBar(recipes)
+

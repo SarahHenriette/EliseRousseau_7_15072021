@@ -23,13 +23,13 @@ export default class SearchPrincipalBar {
     mergeSort(array, saisieUser) {
         console.log("ok")
 
-        if(array.length > 1) {
+        // if(array.length > 10) {
             const middleIndex = Math.floor(array.length / 2)
             const leftSide = array.slice(0, middleIndex)
             const rightSide = array.slice(middleIndex)
     
-            this.mergeSort(leftSide, saisieUser)
-            this.mergeSort(rightSide, saisieUser)
+            // this.mergeSort(leftSide, saisieUser)
+            // this.mergeSort(rightSide, saisieUser)
     
     
             let leftIndex = 0, rightIndex = 0
@@ -41,7 +41,7 @@ export default class SearchPrincipalBar {
                     leftIndex++
                     rightIndex++
             }
-        }
+        // }
     }
 
     //si le titre, la description ou l'un des ingredient contient la saisie utilisateur alors j'active la card grace à l'id 
