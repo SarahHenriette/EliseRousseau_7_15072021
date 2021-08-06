@@ -24,6 +24,7 @@ export default class SearchPrincipalBar {
     //sinon je retire la class active 
     activeCardsRecipes(saisieUser){
         for(let i = 0; i< this.recipes.length; i++) {  
+            console.log("ok")
             if(this.recipes[i].name.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1 || this.recipes[i].description.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1 || this.verifyIngredientcontainSaisiUser(this.recipes[i].ingredients, saisieUser) == true){
                 this.cardsRecipesDOM[i].classList.add('active')
             }else {
