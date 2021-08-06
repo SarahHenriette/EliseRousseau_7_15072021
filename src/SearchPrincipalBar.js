@@ -21,8 +21,8 @@ export default class SearchPrincipalBar {
     }
     //Je divise le tableau jusqu'a ce qu'il ne puisse plus se diviser
     mergeSort(array, saisieUser) {
-        console.log("ok")
         if(array.length > 1) {
+            console.log("ok")
             const middleIndex = Math.floor(array.length / 2)
             const leftSide = array.slice(0, middleIndex)
             const rightSide = array.slice(middleIndex)
@@ -67,11 +67,5 @@ export default class SearchPrincipalBar {
         });
         return value
     }
-
-  
-
- 
-
-
     
 }
