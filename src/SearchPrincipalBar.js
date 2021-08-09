@@ -20,7 +20,7 @@ export default class SearchPrincipalBar {
     }
     
     //je vérifie dans le tableau JSON si l'une des recettes contient la saisie de l'utilisateur
-    //si oui alors grâce à l'index je recupere dans le tableau la bonne card correspondant à la recette et j'joute la class active
+    //si oui alors grâce à l'index je recupere la card correspondant à la recette et j'ajoute la class active
     //sinon je retire la class active 
     activeCardsRecipes(saisieUser){
         for(let i = 0; i< this.recipes.length; i++) {  
@@ -38,8 +38,6 @@ export default class SearchPrincipalBar {
         let test 
         recipe.forEach(element => {
             if(element.ingredient.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1){
-                console.log(element.ingredient.toLowerCase())
-                console.log(saisieUser.toLowerCase())
                 test = true
             }
         });  
