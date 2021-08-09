@@ -41,17 +41,23 @@
 }
 .container .filters .filter {
   margin-right: 3%;
-  min-width: auto;
-  min-height: 69px;
-  width: 170px;
+  max-width: 170px;
+  height: 69px;
   display: flex;
   border-radius: 5px;
   position: relative;
+  flex-direction: column;
+  transition: width 0.3s;
 }
 .container .filters .filter input {
   background-color: transparent;
   color: white;
   border: none;
+  text-align: start;
+  min-width: 170px;
+  max-width: auto;
+  height: 69px;
+  display: block;
 }
 .container .filters .filter input::placeholder {
   color: white;
@@ -61,6 +67,26 @@
   border: none;
   box-shadow: none;
 }
+.container .filters .filter ul {
+  top: 69px;
+  position: static;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 667px;
+  background-color: transparent;
+  transition: max-width 0.3s;
+  border: none;
+}
+.container .filters .filter ul li {
+  min-width: 33%;
+  max-width: 100%;
+}
+.container .filters .filter ul li button {
+  color: white;
+}
+.container .filters .filter ul li button:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
 .container .filters .filter-btn {
   position: absolute;
   right: 15px;
@@ -69,9 +95,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
+  height: 69px;
 }
 .container .filters .filter-btn i {
   color: white;
+  transform: rotate(0deg);
+}
+.container .filters .filter.active {
+  width: auto;
+  min-width: 250px;
+  max-width: 667px;
+  height: auto;
+  transition: max-width 0.3s ease-in-out;
+}
+.container .filters .filter.active .filter-btn {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease-in-out;
 }
 .container .filters .filter-ingredients {
   background-color: #3282F7;
