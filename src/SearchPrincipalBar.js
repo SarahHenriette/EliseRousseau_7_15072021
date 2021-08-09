@@ -19,29 +19,24 @@ export default class SearchPrincipalBar {
             }
         })
     }
-    //Je divise le tableau jusqu'a ce qu'il ne puisse plus se diviser
+    //Je divise le tableau en deux
     mergeSort(array, saisieUser) {
         console.log("ok")
 
-        // if(array.length > 10) {
             const middleIndex = Math.floor(array.length / 2)
             const leftSide = array.slice(0, middleIndex)
             const rightSide = array.slice(middleIndex)
-    
-            // this.mergeSort(leftSide, saisieUser)
-            // this.mergeSort(rightSide, saisieUser)
-    
-    
+
             let leftIndex = 0, rightIndex = 0
-            //une fois le tableau diviser je n'ai plus que des index
-            //pour chaque index je verifie si il contient la saisie de l'utilisateur
+
+            //Je boucle sur chaque index de la parti gauche et de la partie droite 
             while(leftIndex < leftSide.length && rightIndex < rightSide.length) {
+                //pour chaque index je verifie si la recette contient la saisie utilisateur
                 this.verifySaisiUserInRecipe(leftSide[leftIndex], saisieUser)
                 this.verifySaisiUserInRecipe(rightSide[rightIndex], saisieUser)
                     leftIndex++
                     rightIndex++
             }
-        // }
     }
 
     //si le titre, la description ou l'un des ingredient contient la saisie utilisateur alors j'active la card grace à l'id 
