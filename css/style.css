@@ -117,9 +117,6 @@
 .container .listCard .card-ingredients li {
   list-style-type: none;
 }
-.container .listCard .card-ingredients_name::after {
-  content: " : ";
-}
 .container .listCard .card-title {
   font-size: 1.2em;
 }
