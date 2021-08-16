@@ -19,14 +19,13 @@ export default class SearchPrincipalBar {
             }
         })
     }
+
     //Je divise le tableau en deux
     mergeSort(array, saisieUser) {
         console.log("ok")
-
             const middleIndex = Math.floor(array.length / 2)
             const leftSide = array.slice(0, middleIndex)
             const rightSide = array.slice(middleIndex)
-
             let leftIndex = 0, rightIndex = 0
 
             //Je boucle sur chaque index de la parti gauche et de la partie droite 
