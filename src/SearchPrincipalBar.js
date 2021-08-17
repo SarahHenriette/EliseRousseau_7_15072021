@@ -2,10 +2,14 @@
   
   export default class SearchPrincipalBar {
     constructor (recipes) {
+        this.recipes = recipes
         this.principalSearchBar = document.getElementById('principal-search')
         this.listCardRecipesDOM = document.querySelector('.listCard').children 
-        this.search(recipes)
-        this.tabFilter = []
+        this.filterIngredients = document.querySelector(".filter-ingredients .dropdown-menu")
+        this.filterAppareils = document.querySelector(".filter-appareil .dropdown-menu")
+        this.filterUstensiles = document.querySelector(".filter-ustensiles .dropdown-menu")
+        this.search(this.recipes)
+        this.tabFilterTag = []
     }
 
     //a la saisie du champ 
@@ -15,10 +19,13 @@
         this.principalSearchBar.addEventListener('keyup', (e) => {
             if(e.target.value.length >= 3 ) {
                 this.mergeSort(recipes, e.target.value)
+                console.log(this.tabFilterTag)
+                new SearchFilter(this.tabFilterTag)
             } else {
-                for (const i of this.listCardRecipesDOM) {
-                    i.classList.remove("active")
-                }
+                this.hidenCardsRecipes()
+                console.log(this.recipes)
+                new SearchFilter(this.recipes)
+
             }
         })
     }
@@ -41,7 +48,7 @@
             }
 
             // console.log(this.tabFilter)
-            new SearchFilter(this.tabFilter)
+            
     }
 
     //si le titre, la description ou l'un des ingredient contient la saisie utilisateur alors j'active la card grace à l'id 
@@ -51,15 +58,15 @@
         index.description.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1  ||
         this.verifySaisiUserInIngredient(index.ingredients, saisieUser) == true 
         ) {            
-            if(this.tabFilter.indexOf(index) == -1) {
-                this.tabFilter.push(index)
+            if(this.tabFilterTag.indexOf(index) == -1) {
+                this.tabFilterTag.push(index)
             }
             
             document.getElementById(index.id).classList.add('active')
         }else {
             document.getElementById(index.id).classList.remove('active')
-            if(this.tabFilter.indexOf(index) !== -1) {
-                this.tabFilter.splice(this.tabFilter.findIndex(i => i === index), 1)
+            if(this.tabFilterTag.indexOf(index) !== -1) {
+                this.tabFilterTag.splice(this.tabFilterTag.findIndex(i => i === index), 1)
             }
         }
 
@@ -74,6 +81,17 @@
             }
         });
         return value
+    }
+
+    //cache les cards des recettes
+    hidenCardsRecipes() {
+        for (const i of this.listCardRecipesDOM) {
+            i.classList.remove("active")
+        }
+        this.filterIngredients.innerHTML = ""
+        this.filterAppareils.innerHTML = ""
+        this.filterUstensiles.innerHTML = ""
+
     }
     
 }
