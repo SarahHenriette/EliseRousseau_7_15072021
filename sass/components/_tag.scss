@@ -1,0 +1,17 @@
+.tags {
+    margin-top: 3em;
+    &-tag {
+        width: auto;
+        height: 37px;
+        background-color: $blue;
+        padding: 0.5em 1em;
+        color: white;
+        border-radius: 5px;
+        &::after {
+            content: url('../../img/icon-close-tag.svg');
+            position: relative;
+            top: 3px;
+            left: 4px;
+        }
+    }
+}

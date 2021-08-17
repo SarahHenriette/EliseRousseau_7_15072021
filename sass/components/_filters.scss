@@ -9,7 +9,7 @@
         border-radius: 5px;
         position: relative;
         flex-direction: column;
-        transition: width .3s;
+        transition: max-width .3s ease-in-out;
         input {
             background-color: transparent;
             color: white;

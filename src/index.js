@@ -1,6 +1,8 @@
 import recipes from "./../recipes"
 import CreateCardRecipe from "./CreateCardRecipe"
 import SearchPrincipalBar from "./SearchPrincipalBar"
+import SearchFilter from "./SearchFilter"
+
 console.log("j'ai choisi l'algo 2")
 //création des cards des recettes
 for (const recipe of recipes) {
@@ -20,7 +22,9 @@ for (let index = 0; index < filters.length; index++) {
         e.target.parentElement.classList.add("active")
         console.log(e.target.placeholder)
         if(e.target.placeholder == "Ingredients") {
-            e.target.placeholder = "Rechercher un ingrédient"
+            e.target.placeholder = "Rechercher un ingrédient"  
+            // // console.log(recipes)
+            // new SearchFilter(recipes)        
         }else if(e.target.placeholder == "Appareils") {
             e.target.placeholder = "Rechercher un appareil"
         }else if(e.target.placeholder == "Ustensiles") {

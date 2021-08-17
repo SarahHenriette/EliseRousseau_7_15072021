@@ -35,6 +35,23 @@
   border: none;
   background-color: #E7E7E7;
 }
+.container .tags {
+  margin-top: 3em;
+}
+.container .tags-tag {
+  width: auto;
+  height: 37px;
+  background-color: #3282F7;
+  padding: 0.5em 1em;
+  color: white;
+  border-radius: 5px;
+}
+.container .tags-tag::after {
+  content: url("../../img/icon-close-tag.svg");
+  position: relative;
+  top: 3px;
+  left: 4px;
+}
 .container .filters {
   display: flex;
   margin-top: 3%;
@@ -47,7 +64,7 @@
   border-radius: 5px;
   position: relative;
   flex-direction: column;
-  transition: width 0.3s;
+  transition: max-width 0.3s ease-in-out;
 }
 .container .filters .filter input {
   background-color: transparent;

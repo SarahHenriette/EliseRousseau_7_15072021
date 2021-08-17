@@ -1,8 +1,11 @@
+    import SearchFilter from "./SearchFilter"
+  
   export default class SearchPrincipalBar {
     constructor (recipes) {
         this.principalSearchBar = document.getElementById('principal-search')
         this.listCardRecipesDOM = document.querySelector('.listCard').children 
         this.search(recipes)
+        this.tabFilter = []
     }
 
     //a la saisie du champ 
@@ -36,6 +39,9 @@
                     leftIndex++
                     rightIndex++
             }
+
+            // console.log(this.tabFilter)
+            new SearchFilter(this.tabFilter)
     }
 
     //si le titre, la description ou l'un des ingredient contient la saisie utilisateur alors j'active la card grace à l'id 
@@ -44,12 +50,19 @@
         if(index.name.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1  ||
         index.description.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1  ||
         this.verifySaisiUserInIngredient(index.ingredients, saisieUser) == true 
-        ) {
+        ) {            
+            if(this.tabFilter.indexOf(index) == -1) {
+                this.tabFilter.push(index)
+            }
+            
             document.getElementById(index.id).classList.add('active')
         }else {
             document.getElementById(index.id).classList.remove('active')
-    
+            if(this.tabFilter.indexOf(index) !== -1) {
+                this.tabFilter.splice(this.tabFilter.findIndex(i => i === index), 1)
+            }
         }
+
     }
 
     //verifie si la liste des ingredients des recettes contient la saisie utilisateur
