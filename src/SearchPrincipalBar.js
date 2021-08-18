@@ -91,7 +91,6 @@
         this.filterIngredients.innerHTML = ""
         this.filterAppareils.innerHTML = ""
         this.filterUstensiles.innerHTML = ""
-
     }
     
 }

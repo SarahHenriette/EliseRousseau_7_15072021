@@ -95,6 +95,7 @@
   border: none;
 }
 .container .filters .filter ul li {
+  display: none;
   min-width: 33%;
   max-width: 100%;
 }
@@ -103,6 +104,9 @@
 }
 .container .filters .filter ul li button:hover {
   background-color: rgba(0, 0, 0, 0.5);
+}
+.container .filters .filter ul .active {
+  display: block;
 }
 .container .filters .filter-btn {
   position: absolute;
