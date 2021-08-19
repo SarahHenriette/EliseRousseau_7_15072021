@@ -11,79 +11,52 @@ export default class SearchFilter {
         // this.addAppareils()
         // this.addUstensiles()
     }
-
+    sortIngredient(recipe, tabingredient) {
+        //filtre dans les ingredients de la recette
+        recipe.ingredients.filter(i => {
+            console.log(i)
+            //S'il n'existe pas encore, insertion de l'ingredient dans le tableau "tabingredient"
+            if (tabingredient.indexOf(i.ingredient) == -1){
+                tabingredient.push(i.ingredient)
+            }
+        })
+        //A la saisie du filtre
+        document.querySelector("#dropdownMenuIngredients").addEventListener("keyup", (e)=> {
+            //filtre le tab "tabingredient"
+            tabingredient.filter(ingredient => {
+                //si l'ingredient ne contient pas la saisie utilisateur alors je le cache
+                //sinon je le rend visible
+                if(ingredient.toLowerCase().indexOf(e.target.value.toLowerCase()) == -1) {
+                    document.getElementById(ingredient.replace(/ /g, "")).parentElement.classList.remove('active')
+                    return
+                }
+                document.getElementById(ingredient.replace(/ /g, "")).parentElement.classList.add('active')
+            })
+        })
+    }
     //ajout des ingredients dans le filtre ingrédient
     addIngredients(array) {
         let tabingredient = []
         this.filterIngredients.innerHTML = ""
+        //division du tableaux des recettes en deux 
         const middleIndex = Math.floor(array.length / 2)
         const leftSide = array.slice(0, middleIndex)
         const rightSide = array.slice(middleIndex)
-        let leftIndex = 0, rightIndex = 0
 
-        //Je boucle sur chaque index de la parti gauche et de la partie droite 
-        while(leftIndex < leftSide.length && rightIndex < rightSide.length) {
-                leftSide[leftIndex].ingredients.filter(i => {
-                    if(tabingredient.indexOf(i.ingredient) == -1) {
-                        tabingredient.push(i.ingredient)
-                    }  
-                })
-                rightSide[rightIndex].ingredients.filter(i => {
-                    if(tabingredient.indexOf(i.ingredient) == -1) {
-                        tabingredient.push(i.ingredient)
-                    }  
-                })
+        leftSide.filter(recipe => {
+            this.sortIngredient(recipe, tabingredient)
+        })
 
-                leftIndex++
-                rightIndex++
-        }
-
-        // console.log(tabingredient)
-
-        // recherche champ principal
+        rightSide.filter(recipe => {
+            this.sortIngredient(recipe, tabingredient)
+        })
 
         for (const i of tabingredient) {
             this.filterIngredients.innerHTML += `
             <li class="active"><button class="dropdown-item" id=${i.replace(/ /g, "")} type="button">${i}</button></li>
             `
         }
-        
-        document.querySelector("#dropdownMenuIngredients").addEventListener("keyup", (e)=> {
-            if(e.target.value.length >= 3) {
-                console.log("hehoooo")
-                let fil = tabingredient.filter(word => word.toLowerCase().indexOf(e.target.value.toLowerCase()) == -1)
-                console.log(fil)
-                const middleIndex = Math.floor(fil.length / 2)
-                const leftSide = fil.slice(0, middleIndex)
-                const rightSide = fil.slice(middleIndex)
-                let leftIndex = 0, rightIndex = 0
-                while(leftIndex < leftSide.length && rightIndex < rightSide.length) {
-                    if(document.getElementById(leftSide[leftIndex].replace(/ /g, "")) !== null){
-                        document.getElementById(leftSide[leftIndex].replace(/ /g, "")).parentElement.classList.remove('active')
-                    }
-                    if(document.getElementById(rightSide[rightIndex].replace(/ /g, "")) !== null){ 
-                        document.getElementById(rightSide[rightIndex].replace(/ /g, "")).parentElement.classList.remove('active')
-                    }
-                    leftIndex++
-                    rightIndex++
-                }
-                return
-            }
-            const middleIndex = Math.floor(tabingredient.length / 2)
-            const leftSide = tabingredient.slice(0, middleIndex)
-            const rightSide = tabingredient.slice(middleIndex)
-            let leftIndex = 0, rightIndex = 0
-            while(leftIndex < leftSide.length && rightIndex < rightSide.length) {
-                if(document.getElementById(leftSide[leftIndex].replace(/ /g, "")) !== null){
-                    document.getElementById(leftSide[leftIndex].replace(/ /g, "")).parentElement.classList.add('active')
-                }
-                if(document.getElementById(rightSide[rightIndex].replace(/ /g, "")) !== null){
-                    document.getElementById(rightSide[rightIndex].replace(/ /g, "")).parentElement.classList.add('active')
-                }
-                leftIndex++
-                rightIndex++
-            }
-        })
+ 
         // //au click d'un des filtres je crée le tag
         // document.querySelectorAll('.dropdown-item').forEach(element => {
         //     element.addEventListener("click", (e)=> {
@@ -94,6 +67,10 @@ export default class SearchFilter {
         //     })
         // });
     }
+
+
+
+
 
     //ajout des appareils dans le filtre appareil
     addAppareils($saisieFilter = "") {
