@@ -23,31 +23,31 @@ export default class SearchPrincipalBar {
     //si oui alors grâce à l'index je recupere la card correspondant à la recette et j'ajoute la class active
     //sinon je retire la class active 
     activeCardsRecipes(saisieUser){
-        for(let i = 0; i< this.recipes.length; i++) {  
+        this.recipes.filter(recipe => {
             console.log("ok")
-            if(this.recipes[i].name.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1 || this.recipes[i].description.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1 || this.verifyIngredientcontainSaisiUser(this.recipes[i].ingredients, saisieUser) == true){
-                this.cardsRecipesDOM[i].classList.add('active')
-            }else {
-                this.cardsRecipesDOM[i].classList.remove('active')
+            if(recipe.name.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1 || recipe.description.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1 || this.verifyIngredientcontainSaisiUser(recipe.ingredients, saisieUser) == true){
+                    document.getElementById(recipe.id).classList.add('active')
+                    return
             }
-        }
+            document.getElementById(recipe.id).classList.remove('active')
+        })
     }
 
     //fonction qui vérifie si une liste d'ingredients contient la saisie de l'utilisateur
     verifyIngredientcontainSaisiUser(recipe, saisieUser){
         let test 
-        recipe.forEach(element => {
-            if(element.ingredient.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1){
+        recipe.filter(i => {
+            if(i.ingredient.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1){
                 test = true
             }
-        });  
+        })
         return test        
     }
 
     //retire la class active de toutes les cards
     hiddenAllCardsRecipes(){
-        for(let i = 0; i< this.recipes.length; i++) {
-            this.cardsRecipesDOM[i].classList.remove('active')
+        for (const recipe of this.recipes) {
+            document.getElementById(recipe.id).classList.remove('active')
         }
     }
 
