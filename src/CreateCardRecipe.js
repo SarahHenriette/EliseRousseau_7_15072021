@@ -5,6 +5,7 @@ export default class CreateCardRecipe {
         this.card = document.createElement("div")
         this.create() 
         this.createListIngredients()
+        this.createListUstensils()
     }
 
     create() {
@@ -18,9 +19,11 @@ export default class CreateCardRecipe {
                 <h5 class="card-title col-xl-8 col-sm-12">${this.recipe.name}</h5>
                 <p class="card-time col-xl-4 col-sm-12">${this.recipe.time}<img /></p>
             </div>
-            <div class="row justify-content-between">
+            <div class="row justify-content-between" id="card-infos">
                 <ul class="card-ingredients col-6"></ul>
                 <p class="card-description col-6">${this.recipe.description}</p>
+                <p class="${this.recipe.appliance.replace(/ /g, "-")}" type="hidden"></p>
+            
             </div>
         </div>
         `
@@ -28,12 +31,18 @@ export default class CreateCardRecipe {
 
     createListIngredients(){
         this.recipe.ingredients.forEach(i=> {
-            let li = document.createElement("li")
-            li.innerHTML = `
-                <span class="card-ingredients_name">${i.ingredient}</span>
-                <span class="card-ingredients_dose">${ !i.unit && !i.quantity ? "" : !i.unit ? ": "+ i.quantity : ": " + i.quantity + " " + i.unit }</span>
+            this.card.querySelector(".card-ingredients").innerHTML += `
+                <li><span class="card-ingredients_name ${i.ingredient.replace(/ /g, "-")}">${i.ingredient}</span><span class="card-ingredients_dose">${ !i.unit && !i.quantity ? "" : !i.unit ? ": "+ i.quantity : ": " + i.quantity + " " + i.unit }</span></li>
             `
-        this.card.querySelector(".card-ingredients").appendChild(li)
+            });
+    }
+    createListUstensils(){
+        this.recipe.ustensils.forEach(i=> {
+            console.log(i)
+            this.card.querySelector('#card-infos').innerHTML += `
+                <p class="${i.replace(/ /g, "-")}" type="hidden"></p>
+            `
         });
+      
     }
 }

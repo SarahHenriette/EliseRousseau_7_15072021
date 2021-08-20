@@ -32,12 +32,15 @@
         height: 100px;
         li {
             list-style-type: none;
+            .active {
+                background-color: red;
+            }
         }
         &_name::after {
             // content: " : "
         }
     }
-
+    
     &-title {
         font-size: 1.2em;    
     }

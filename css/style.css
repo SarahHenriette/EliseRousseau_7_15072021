@@ -39,18 +39,31 @@
   margin-top: 3em;
 }
 .container .tags-tag {
+  display: none;
   width: auto;
   height: 37px;
-  background-color: #3282F7;
   padding: 0.5em 1em;
   color: white;
   border-radius: 5px;
+  cursor: pointer;
 }
 .container .tags-tag::after {
   content: url("../../img/icon-close-tag.svg");
   position: relative;
   top: 3px;
   left: 4px;
+}
+.container .tags-tag--ingredients {
+  background-color: #3282F7;
+}
+.container .tags-tag--appareils {
+  background-color: #68D9A4;
+}
+.container .tags-tag--ustensiles {
+  background-color: #ED6454;
+}
+.container .tags .active {
+  display: inline-block;
 }
 .container .filters {
   display: flex;
@@ -177,6 +190,9 @@
 }
 .container .listCard .card-ingredients li {
   list-style-type: none;
+}
+.container .listCard .card-ingredients li .active {
+  background-color: red;
 }
 .container .listCard .card-title {
   font-size: 1.2em;
