@@ -41,6 +41,15 @@
             background-color: transparent;
             transition: max-width .3s;
             border: none;
+            .dropdown-item {
+                width: auto;
+                &:active {
+                    background-color: transparent;
+                }
+            }
+            .dropdown-item.active {
+                    background-color: transparent;
+            }
             li {
                 display: none;
                 min-width: 33%;

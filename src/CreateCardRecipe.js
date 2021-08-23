@@ -22,7 +22,7 @@ export default class CreateCardRecipe {
             <div class="row justify-content-between" id="card-infos">
                 <ul class="card-ingredients col-6"></ul>
                 <p class="card-description col-6">${this.recipe.description}</p>
-                <p class="${this.recipe.appliance.replace(/ /g, "-")}" type="hidden"></p>
+                <p class="card-appliance ${this.recipe.appliance.replace(/ /g, "-")}" hidden>${this.recipe.appliance}</p>
             
             </div>
         </div>
@@ -38,9 +38,9 @@ export default class CreateCardRecipe {
     }
     createListUstensils(){
         this.recipe.ustensils.forEach(i=> {
-            console.log(i)
+            // console.log(i)
             this.card.querySelector('#card-infos').innerHTML += `
-                <p class="${i.replace(/ /g, "-")}" type="hidden"></p>
+                <p class="card-ustensil ${i.replace(/ /g, "-")}" hidden>${i}</p>
             `
         });
       

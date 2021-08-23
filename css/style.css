@@ -107,6 +107,15 @@
   transition: max-width 0.3s;
   border: none;
 }
+.container .filters .filter ul .dropdown-item {
+  width: auto;
+}
+.container .filters .filter ul .dropdown-item:active {
+  background-color: transparent;
+}
+.container .filters .filter ul .dropdown-item.active {
+  background-color: transparent;
+}
 .container .filters .filter ul li {
   display: none;
   min-width: 33%;

@@ -19,11 +19,11 @@
         this.principalSearchBar.addEventListener('keyup', (e) => {
             if(e.target.value.length >= 3 ) {
                 this.mergeSort(recipes, e.target.value)
-                console.log(this.tabFilterTag)
+                // console.log(this.tabFilterTag)
                 new SearchFilter(this.tabFilterTag)
             } else {
                 this.hidenCardsRecipes()
-                console.log(this.recipes)
+                // console.log(this.recipes)
                 new SearchFilter(this.recipes)
 
             }
