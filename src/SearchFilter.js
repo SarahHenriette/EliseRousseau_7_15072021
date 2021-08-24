@@ -17,32 +17,11 @@ export default class SearchFilter {
         
     }
 
-    displayOrHideElement(tab, filterName) {
-
-        document.querySelector(filterName).addEventListener("keyup", (e)=> {
-            if(e.target.value.length >= 3) {
-                tab.filter(value => {
-                    //si l'element ne contient pas la saisie utilisateur alors je le cache
-                    //sinon je le rend visible
-                    if(value.toLowerCase().indexOf(e.target.value.toLowerCase()) == -1) {
-                        document.getElementById(value.replace(/ /g, "")).parentElement.classList.remove('active')
-                        return
-                    }
-                    document.getElementById(value.replace(/ /g, "")).parentElement.classList.add('active')
-                })
-           }else {
-               for (const i of document.querySelectorAll("ul li.active")) {
-                   i.classList.remove("active")
-               }
-           }
-        })
-    }
-
-    //ajout des ingredients dans le filtre ingrédient
-    addIngredients(array) {
+      //ajout des ingredients dans le filtre ingrédient
+      addIngredients(array) {
         let tabingredient = []
         this.filterIngredients.innerHTML = ""
-        let ingredientName 
+        //Je filtre le tableau
         array.filter(recipe => {
             //filtre dans les ingredients de la recette
             recipe.ingredients.filter(i => {
@@ -53,27 +32,7 @@ export default class SearchFilter {
             })
     
         })
-
-
-        if(this.principalSearchBar.value.length >= 3 ){
-            this.displayOrHideElement(tabingredient, "#dropdownMenuIngredients")
-            for (const i of tabingredient) {
-                this.filterIngredients.innerHTML += `
-                <li class="active"><button class="dropdown-item" id=${i.replace(/ /g, "")} type="button">${i}</button></li>
-                `
-            }
-            tag.createTag('.dropdown-ingredients .dropdown-item', 'tags-tag--ingredients', array)
-            return
-        }
-
-        for (const i of tabingredient) {
-            this.filterIngredients.innerHTML += `
-            <li ><button class="dropdown-item" id=${i.replace(/ /g, "")} type="button">${i}</button></li>
-            `
-        }
-        tag.createTag('.dropdown-ingredients .dropdown-item', 'tags-tag--ingredients', array)
-
-       
+        this.itemFonctionnality(tabingredient, this.filterIngredients, "#dropdownMenuIngredients", array, '.dropdown-ingredients .dropdown-item', 'tags-tag--ingredients')
     }
 
  
@@ -87,25 +46,7 @@ export default class SearchFilter {
             }
         })
 
-        if(this.principalSearchBar.value.length >= 3 ){
-            this.displayOrHideElement(tabAppareil, "#dropdownMenuAppareils")
-            for (const i of tabAppareil) {
-                this.filterAppareils.innerHTML += `
-                <li class="active"><button class="dropdown-item" id=${i.replace(/ /g, "")} type="button">${i}</button></li>
-                `
-            }
-            tag.createTag('.dropdown-appareils .dropdown-item', 'tags-tag--appareils', array)
-            return
-        }
-
-        this.displayOrHideElement(tabAppareil, "#dropdownMenuAppareils")
-        for (const i of tabAppareil) {
-            this.filterAppareils.innerHTML += `
-            <li><button class="dropdown-item" id=${i.replace(/ /g, "")} type="button">${i}</button></li>
-            `
-        }
-        tag.createTag('.dropdown-appareils .dropdown-item', 'tags-tag--appareils', array)
-
+        this.itemFonctionnality(tabAppareil, this.filterAppareils, "#dropdownMenuAppareils", array, '.dropdown-appareils .dropdown-item', 'tags-tag--appareils')
     }
 
 
@@ -122,27 +63,62 @@ export default class SearchFilter {
             })
         })
 
+        this.itemFonctionnality(tabUstensiles, this.filterUstensiles, "#dropdownMenuUstensiles", array, '.dropdown-ustensiles .dropdown-item', 'tags-tag--ustensiles')
+    }
 
 
+    //regroupe les fonctionnalités lié aux items
+    itemFonctionnality(tabItem, filterItem, filterName, array, dropdownItem, className){
+    
+        //créer les items
+        //quand il ya une valeur dans la bar principal
         if(this.principalSearchBar.value.length >= 3 ){
-            this.displayOrHideElement(tabUstensiles, "#dropdownMenuUstensiles")
-
-            for (const i of tabUstensiles) {
-                this.filterUstensiles.innerHTML += `
-                <li class="active"><button class="dropdown-item" id=${i.replace(/ /g, "")} type="button">${i}</button></li>
-                `
-            }
-            tag.createTag('.dropdown-ustensiles .dropdown-item', 'tags-tag--ustensiles', array)
-            return
+            this.createItemDropdown(tabItem, filterItem, "active")
+        }else {
+            //quand on commence la recherche depuis un filtre
+            this.createItemDropdown(tabItem, filterItem, "")
         }
-        
-        this.displayOrHideElement(tabUstensiles, "#dropdownMenuUstensiles")
 
-        for (const i of tabUstensiles) {
-            this.filterUstensiles.innerHTML += `
-            <li><button class="dropdown-item" id=${i.replace(/ /g, "")} type="button">${i}</button></li>
+        //Gére l'affichage des items
+        this.displayOrHideElement(tabItem, filterName)
+    
+        //créer les tags
+        tag.createTag(dropdownItem, className, array)
+    
+    }
+
+        
+    //créer les items dans un dropdown
+    createItemDropdown(tabItem, filterItem, className){
+        for (const i of tabItem) {
+            filterItem.innerHTML += `
+            <li class="`+ className +`"><button class="dropdown-item" id=${i.replace(/ /g, "")} type="button">${i}</button></li>
             `
         }
-        tag.createTag('.dropdown-ustensiles .dropdown-item', 'tags-tag--ustensiles', array) 
+    }
+
+    //affiche ou masque les ingredients du dropdown
+    displayOrHideElement(tab, filterName) {
+        document.querySelector(filterName).addEventListener("keyup", (e)=> {
+            //si il y a plus de 3 lettres
+            if(e.target.value.length >= 3) {
+                //je filtre le tableau 
+                tab.filter(value => {
+                    //si l'element ne contient pas la saisie utilisateur alors je le cache
+                    //sinon je le rend visible
+                    if(value.toLowerCase().indexOf(e.target.value.toLowerCase()) == -1) {
+                        document.getElementById(value.replace(/ /g, "")).parentElement.classList.remove('active')
+                        return
+                    }
+                    document.getElementById(value.replace(/ /g, "")).parentElement.classList.add('active')
+                })
+                return
+            }
+            //sinon tout les items du dropdown sont invisible 
+            for (const i of document.querySelectorAll("ul li.active")) {
+                i.classList.remove("active")
+            }
+           
+        })
     }
 }

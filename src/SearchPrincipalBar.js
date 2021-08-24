@@ -1,7 +1,8 @@
-    import SearchFilter from "./SearchFilter"
+import SearchFilter from "./SearchFilter"
   
   export default class SearchPrincipalBar {
     constructor (recipes) {
+        console.log(recipes)
         this.recipes = recipes
         this.principalSearchBar = document.getElementById('principal-search')
         this.listCardRecipesDOM = document.querySelector('.listCard').children 
@@ -15,24 +16,29 @@
     //a la saisie du champ 
     //si il y a au moins 3 caractere je lance la recherche
     //sinon je masque toutes les cards
-    search(recipes){
+    /**
+     * recherche dans le champ principal
+     * @param {array} array - liste des recettes
+     */
+    search(array){
         this.principalSearchBar.addEventListener('keyup', (e) => {
             if(e.target.value.length >= 3 ) {
-                this.mergeSort(recipes, e.target.value)
-                // console.log(this.tabFilterTag)
+                this.mergeSort(array, e.target.value)
                 new SearchFilter(this.tabFilterTag)
             } else {
                 this.hidenCardsRecipes()
-                // console.log(this.recipes)
                 new SearchFilter(this.recipes)
-
             }
         })
     }
 
     //Je divise le tableau en deux
+    /** 
+    * recherche de la saisie utilisateur dans la liste des recettes
+    * @param {array} array - liste des recettes
+    * @param {string} saisieUser - Saisie de l'utilisateur
+    */
     mergeSort(array, saisieUser) {
-        console.log("ok")
             const middleIndex = Math.floor(array.length / 2)
             const leftSide = array.slice(0, middleIndex)
             const rightSide = array.slice(middleIndex)
@@ -45,10 +51,7 @@
                 this.verifySaisiUserInRecipe(rightSide[rightIndex], saisieUser)
                     leftIndex++
                     rightIndex++
-            }
-
-            // console.log(this.tabFilter)
-            
+            }            
     }
 
     //si le titre, la description ou l'un des ingredient contient la saisie utilisateur alors j'active la card grace à l'id 
