@@ -16,10 +16,6 @@ import SearchFilter from "./SearchFilter"
     //a la saisie du champ 
     //si il y a au moins 3 caractere je lance la recherche
     //sinon je masque toutes les cards
-    /**
-     * recherche dans le champ principal
-     * @param {array} array - liste des recettes
-     */
     search(array){
         this.principalSearchBar.addEventListener('keyup', (e) => {
             if(e.target.value.length >= 3 ) {
@@ -33,11 +29,6 @@ import SearchFilter from "./SearchFilter"
     }
 
     //Je divise le tableau en deux
-    /** 
-    * recherche de la saisie utilisateur dans la liste des recettes
-    * @param {array} array - liste des recettes
-    * @param {string} saisieUser - Saisie de l'utilisateur
-    */
     mergeSort(array, saisieUser) {
             const middleIndex = Math.floor(array.length / 2)
             const leftSide = array.slice(0, middleIndex)

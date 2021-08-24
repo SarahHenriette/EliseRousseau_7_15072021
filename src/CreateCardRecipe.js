@@ -38,7 +38,6 @@ export default class CreateCardRecipe {
     }
     createListUstensils(){
         this.recipe.ustensils.forEach(i=> {
-            // console.log(i)
             this.card.querySelector('#card-infos').innerHTML += `
                 <p class="card-ustensil ${i.replace(/ /g, "-")}" hidden>${i}</p>
             `

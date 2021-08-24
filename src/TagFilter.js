@@ -3,11 +3,36 @@ export default class TagFilter {
         this.filterIngredients = document.querySelector(".filter-ingredients .dropdown-menu")
         this.filterAppareils = document.querySelector(".filter-appareil .dropdown-menu")
         this.filterUstensiles = document.querySelector(".filter-ustensiles .dropdown-menu")
-       
         this.test = []
         
     }
 
+    /**
+     * creer un tag
+     * @param {HTMLElement} filterItem - filtre/dropdown-menu dans lequel va être les dropdowns items
+     * @param {string} className - nom de classe pour savoir de quel filtre à été créer le tag
+     * @param {array} array - liste des recettes
+     */
+    createTag(filterItem, className, array) {
+        //au click d'un des filtres je crée le tag
+        filterItem.querySelectorAll('.dropdown-item').forEach(element => {
+            element.addEventListener("click", (e)=> {
+                //je crée le tag
+                document.querySelector('.tags').innerHTML += `
+                <span class="tags-tag ${className} ${e.target.innerHTML.replace(/ /g, "-")} active">${e.target.innerHTML}</span>
+                ` 
+                //items dropdown invisible
+                this.itemDropdownInvisible()
+
+                this.verifyTagInCards(array)
+
+                this.itemDropdownVisible()
+
+                this.close(array) 
+                
+            })
+        });
+    }
 
     //tout les items des dropdown sont invisibles
     itemDropdownInvisible(){
@@ -23,107 +48,90 @@ export default class TagFilter {
         }
     }
 
-    //je rend visible les items liée aux card actives
+    //je rend visible les items des dropdown liée aux cards actives
     itemDropdownVisible(){
-        for (const i of document.querySelectorAll('.listCard .active')) {
-            for (const e of i.querySelectorAll(".card-ingredients_name")) {
-                document.getElementById(e.innerHTML.replace(/ /g, "")).parentElement.classList.add('active')
+        const cardDOMactive = document.querySelectorAll('.listCard .active')
+        for (const card of cardDOMactive) {
+            for (const i of card.querySelectorAll(".card-ingredients_name")) {
+                const valueIngredient = i.innerHTML.replace(/ /g, "")
+                const itemDropdown = document.getElementById(valueIngredient).parentElement
+                itemDropdown.classList.add('active')
             }
-            for (const e of i.querySelectorAll(".card-appliance")) {
-                document.getElementById(e.innerHTML.replace(/ /g, "")).parentElement.classList.add('active')
+            for (const i of card.querySelectorAll(".card-appliance")) {
+                const valueAppliance = i.innerHTML.replace(/ /g, "")
+                const itemDropdown = document.getElementById(valueAppliance).parentElement
+                itemDropdown.classList.add('active')
             }
-            for (const e of i.querySelectorAll(".card-ustensil")) {
-                document.getElementById(e.innerHTML.replace(/ /g, "")).parentElement.classList.add('active')
+            for (const i of card.querySelectorAll(".card-ustensil")) {
+                const valueUstensil = i.innerHTML.replace(/ /g, "")
+                const itemDropdown = document.getElementById(valueUstensil).parentElement
+                itemDropdown.classList.add('active')
             }
         }
     }
 
-    createTag(item, className, array) {
-        //au click d'un des filtres je crée le tag
-        document.querySelectorAll(item).forEach(element => {
-            element.addEventListener("click", (e)=> {
-                //je crée le tag
-                document.querySelector('.tags').innerHTML += `
-                <span class="tags-tag ${className} ${e.target.innerHTML.replace(/ /g, "-")} active">${e.target.innerHTML}</span>
-                ` 
-                //items dropdown invisible
-                this.itemDropdownInvisible()
+    /**
+     * verifie si les cards qui contiennent le tag et les affichent
+     * @param {array} array - liste des recettes
+     */
+    verifyTagInCards(array) {
+        const cardDOMactive = document.querySelectorAll('.listCard .active')
+        for (const card of array) { 
+            const cardDOM = document.getElementById(card.id)
+            for (const tag of document.querySelector('.tags').children) {
+                const valueTag = tag.innerHTML.replace(/ /g, "-")
 
-                //s'il y a des card active
-                if(document.querySelectorAll('.listCard .active').length > 0) {
-                     //je boucle sur chaque card et tag
-                    for (const card of array) { 
-                       for (const tag of document.querySelector('.tags').children) {
-                           //si la car ne contient pas le tag alors la card est desactivé
-                            if(!document.getElementById(card.id).querySelector(`.${tag.innerHTML.replace(/ /g, "-")}`)){
-                                document.getElementById(card.id).classList.remove('active')        
-                            }
-                           
-                       }
+                if(cardDOMactive.length > 0) {
+                    if(!cardDOM.querySelector(`.${valueTag}`)){
+                        cardDOM.classList.remove('active')        
                     }
-
-                    this.itemDropdownVisible()
-     
-                    this.close(array) 
-
-                    return
-                }
-
-                this.itemDropdownInvisible()
-
-                for (const card of array) {  
-                    for (const tag of document.querySelector('.tags').children) {
-                        if(document.getElementById(card.id).querySelector(`.${tag.innerHTML.replace(/ /g, "-")}`)){
-                            document.getElementById(card.id).classList.add('active')
-                        }
+                }else {
+                    if(cardDOM.querySelector(`.${valueTag}`)){
+                        cardDOM.classList.add('active')
                     }
-                }
-
-                this.itemDropdownVisible()
-
-                this.close(array) 
-            })
-        });
+                }    
+            }
+        }
     }
 
+   
 
-
-
+    /**
+     * au click du tag, je supprime le tag ainsi que les card contenant le tag
+     * @param {array} array - liste des recettes
+     */
     close(array){
-        for (const tag of document.querySelectorAll('.tags-tag')) {
-            tag.addEventListener("click", (e)=>{
-                console.log("je feeeeeeeerme cetttte meeeeeerde")
-                document.querySelector(`.tags .${e.target.innerHTML.replace(/ /g, "-")}`).remove()
-              
+        const tags = document.querySelector('.tags').children
+        for (const tag of tags ) {
+            tag.addEventListener("click", ()=>{
+                tag.remove()
+                const principalSearch = document.getElementById('principal-search')
+                //supprime tout les items des filtres/dropdown-menu
                 this.itemDropdownInvisible()
-
-
-                    for (const card of array) {  
-                        if(document.getElementById('principal-search').value.length >= 3){
-                            document.getElementById(card.id).classList.add('active')
-                          
-                            
-                        }else {
-                            document.getElementById(card.id).classList.remove('active')
-                        }
-                      
-                        for (const tag of document.querySelector('.tags').children) {
-                            if(document.getElementById('principal-search').value.length >= 3){
-                                if(!document.getElementById(card.id).querySelector(`.${tag.innerHTML.replace(/ /g, "-")}`)){
-                                    document.getElementById(card.id).classList.remove('active')
-                                }
-                            }else {
-                                if(document.getElementById(card.id).querySelector(`.${tag.innerHTML.replace(/ /g, "-")}`)){
-                                    document.getElementById(card.id).classList.add('active')
-                                }
+                console.log('t ooou')
+                for (const card of array) {  
+                    const cardDOM = document.getElementById(card.id)
+                    if(principalSearch.value.length >= 3){
+                        cardDOM.classList.add('active')
+                        for (const tag of tags) {
+                            const valueTag = tag.innerHTML.replace(/ /g, "-")
+                            if(!cardDOM.querySelector(`.${valueTag}`)){
+                                cardDOM.classList.remove('active')
                             }
-
                         }
-                        
+                    }else {
+                        cardDOM.classList.remove('active')
+                        for (const tag of tags) {
+                            const valueTag = tag.innerHTML.replace(/ /g, "-")
+                            if(cardDOM.querySelector(`.${valueTag}`)){
+                                cardDOM.classList.add('active')
+                            }
+                        }
                     }
-
-                    this.itemDropdownVisible()
-
+                        
+                }
+                //je rend visible les items des dropdown liée aux cards actives
+                this.itemDropdownVisible()
             })
         }
     }

@@ -17,8 +17,12 @@ export default class SearchFilter {
         
     }
 
-      //ajout des ingredients dans le filtre ingrédient
-      addIngredients(array) {
+  
+      /**
+     * ajout des ingredients dans le filtre ingrédient
+     * @param {array} array - Liste des recettes
+     */
+    addIngredients(array) {
         let tabingredient = []
         this.filterIngredients.innerHTML = ""
         //Je filtre le tableau
@@ -32,11 +36,14 @@ export default class SearchFilter {
             })
     
         })
-        this.itemFonctionnality(tabingredient, this.filterIngredients, "#dropdownMenuIngredients", array, '.dropdown-ingredients .dropdown-item', 'tags-tag--ingredients')
+        this.itemFonctionnality(tabingredient, this.filterIngredients, "#dropdownMenuIngredients", array, 'tags-tag--ingredients')
     }
 
  
-    //ajout des appareils dans le filtre appareil
+    /**
+     * ajout des appareils dans le filtre appareil
+     * @param {array} array - Liste des recettes
+     */
     addAppareils(array) {
         let tabAppareil = []
         this.filterAppareils.innerHTML = ""
@@ -46,15 +53,17 @@ export default class SearchFilter {
             }
         })
 
-        this.itemFonctionnality(tabAppareil, this.filterAppareils, "#dropdownMenuAppareils", array, '.dropdown-appareils .dropdown-item', 'tags-tag--appareils')
+        this.itemFonctionnality(tabAppareil, this.filterAppareils, "#dropdownMenuAppareils", 'tags-tag--appareils')
     }
 
 
-    //ajout des ustensiles dans le filtre ustensile
+     /**
+     * ajout des ustensiles dans le filtre ustensile
+     * @param {array} array - Liste des recettes
+     */
     addUstensiles(array) {
         let tabUstensiles = []
         this.filterUstensiles.innerHTML = ""
-
         array.filter(recipe => {
             recipe.ustensils.filter(i => {
                 if (tabUstensiles.indexOf(i) == -1){
@@ -63,12 +72,19 @@ export default class SearchFilter {
             })
         })
 
-        this.itemFonctionnality(tabUstensiles, this.filterUstensiles, "#dropdownMenuUstensiles", array, '.dropdown-ustensiles .dropdown-item', 'tags-tag--ustensiles')
+        this.itemFonctionnality(tabUstensiles, this.filterUstensiles, "#dropdownMenuUstensiles", array,  'tags-tag--ustensiles')
     }
 
 
-    //regroupe les fonctionnalités lié aux items
-    itemFonctionnality(tabItem, filterItem, filterName, array, dropdownItem, className){
+    /**
+     * regroupe les fonctionnalités lié aux items
+     * @param {array} tabItem - tableau qui contient tout les dropdowns items
+     * @param {HTMLElement} filterItem - filtre/dropdown-menu dans lequel va être les dropdowns items
+     * @param {string} filterName - nom du filtre/dropdown-menu, champ de recherche
+     * @param {array} array - liste des recettes
+     * @param {string} className - nom de classe pour savoir de quel filtre à été créer le tag
+     */
+    itemFonctionnality(tabItem, filterItem, filterName, array, className){
     
         //créer les items
         //quand il ya une valeur dans la bar principal
@@ -83,12 +99,17 @@ export default class SearchFilter {
         this.displayOrHideElement(tabItem, filterName)
     
         //créer les tags
-        tag.createTag(dropdownItem, className, array)
+        tag.createTag(filterItem, className, array)
     
     }
 
         
-    //créer les items dans un dropdown
+     /**
+     * créer les items dans les filtres
+     * @param {array} tabItem - tableau qui contient tout les dropdowns items
+     * @param {HTMLElement} filterItem - filtre/dropdown-menu dans lequel va être les dropdowns items
+     * @param {string} className - classe active permettant de rendre visible l'item
+     */
     createItemDropdown(tabItem, filterItem, className){
         for (const i of tabItem) {
             filterItem.innerHTML += `
@@ -97,13 +118,17 @@ export default class SearchFilter {
         }
     }
 
-    //affiche ou masque les ingredients du dropdown
-    displayOrHideElement(tab, filterName) {
+     /**
+     * affiche ou masque les ingredients du dropdown
+     * @param {array} tabItem - tableau qui contient tout les dropdowns items
+     * @param {HTMLElement} filterItem - filtre/dropdown-menu dans lequel va être les dropdowns items
+     */
+    displayOrHideElement(tabItem, filterName) {
         document.querySelector(filterName).addEventListener("keyup", (e)=> {
             //si il y a plus de 3 lettres
             if(e.target.value.length >= 3) {
                 //je filtre le tableau 
-                tab.filter(value => {
+                tabItem.filter(value => {
                     //si l'element ne contient pas la saisie utilisateur alors je le cache
                     //sinon je le rend visible
                     if(value.toLowerCase().indexOf(e.target.value.toLowerCase()) == -1) {
@@ -118,7 +143,6 @@ export default class SearchFilter {
             for (const i of document.querySelectorAll("ul li.active")) {
                 i.classList.remove("active")
             }
-           
         })
     }
 }
