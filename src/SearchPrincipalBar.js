@@ -12,7 +12,7 @@ export default class SearchPrincipalBar {
         this.tabFilterTag = []
     }
 
-     //A la saisie de l'utilisateur j'effectue la recherche
+    //A la saisie de l'utilisateur j'effectue la recherche
     //si la saisie à plus de caracteres je fais la recherche 
     //sinon je n'affiche rien dans la page
     search() {
@@ -27,9 +27,14 @@ export default class SearchPrincipalBar {
         })
     }
     
-    //je vérifie dans le tableau JSON si l'une des recettes contient la saisie de l'utilisateur
-    //si oui alors grâce à l'index je recupere la card correspondant à la recette et j'ajoute la class active
-    //sinon je retire la class active 
+  
+      /**
+     * je vérifie dans le tableau JSON si l'une des recettes contient la saisie de l'utilisateur
+     * si oui alors grâce à l'index je recupere la card correspondant à la recette et j'ajoute la class active
+     * sinon je retire la class active 
+     * @param {string} saisieUser - saisie de l'utilisateur
+     * 
+     */
     activeCardsRecipes(saisieUser){
         this.recipes.filter(recipe => {
             // console.log("ok")
@@ -45,9 +50,23 @@ export default class SearchPrincipalBar {
                 this.tabFilterTag.splice(this.tabFilterTag.findIndex(i => i === recipe), 1)
             }
         })
+
+        const cardDOM = document.querySelector('.listCard .listCard--noCard')
+        const cardDOMactive = document.querySelectorAll('.listCard .active')
+
+        if(cardDOMactive.length === 0){
+            console.log(cardDOM)
+            cardDOM.style.display = "block"
+            return
+        }
+        cardDOM.style.display = "none"
     }
 
-    //fonction qui vérifie si une liste d'ingredients contient la saisie de l'utilisateur
+    /**
+     * vérifie si une liste d'ingredients contient la saisie de l'utilisateur
+     * @param {object} recipe - recette
+     * @param {string} saisieUser - saisie de l'utilisateur
+     */
     verifyIngredientcontainSaisiUser(recipe, saisieUser){
         let test 
         recipe.filter(i => {

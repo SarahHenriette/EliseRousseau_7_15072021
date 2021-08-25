@@ -25,6 +25,10 @@
         justify-content: space-between;
         flex-wrap: wrap;
         padding-bottom: 5%;
+        &--noCard {
+            margin-top: 2em;
+            display: none
+        }
         @import 'components/card' ;
        
     }
