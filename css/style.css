@@ -35,6 +35,36 @@
   border: none;
   background-color: #E7E7E7;
 }
+.container .tags {
+  margin-top: 3em;
+}
+.container .tags-tag {
+  display: none;
+  width: auto;
+  height: 37px;
+  padding: 0.5em 1em;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.container .tags-tag::after {
+  content: url("../../img/icon-close-tag.svg");
+  position: relative;
+  top: 3px;
+  left: 4px;
+}
+.container .tags-tag--ingredients {
+  background-color: #3282F7;
+}
+.container .tags-tag--appareils {
+  background-color: #68D9A4;
+}
+.container .tags-tag--ustensiles {
+  background-color: #ED6454;
+}
+.container .tags .active {
+  display: inline-block;
+}
 .container .filters {
   display: flex;
   margin-top: 3%;
@@ -47,7 +77,7 @@
   border-radius: 5px;
   position: relative;
   flex-direction: column;
-  transition: width 0.3s;
+  transition: max-width 0.3s ease-in-out;
 }
 .container .filters .filter input {
   background-color: transparent;
@@ -77,7 +107,17 @@
   transition: max-width 0.3s;
   border: none;
 }
+.container .filters .filter ul .dropdown-item {
+  width: auto;
+}
+.container .filters .filter ul .dropdown-item:active {
+  background-color: transparent;
+}
+.container .filters .filter ul .dropdown-item.active {
+  background-color: transparent;
+}
 .container .filters .filter ul li {
+  display: none;
   min-width: 33%;
   max-width: 100%;
 }
@@ -86,6 +126,9 @@
 }
 .container .filters .filter ul li button:hover {
   background-color: rgba(0, 0, 0, 0.5);
+}
+.container .filters .filter ul .active {
+  display: block;
 }
 .container .filters .filter-btn {
   position: absolute;
@@ -156,6 +199,9 @@
 }
 .container .listCard .card-ingredients li {
   list-style-type: none;
+}
+.container .listCard .card-ingredients li .active {
+  background-color: red;
 }
 .container .listCard .card-title {
   font-size: 1.2em;
