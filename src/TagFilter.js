@@ -109,7 +109,6 @@ export default class TagFilter {
                 const principalSearch = document.getElementById('principal-search')
                 //supprime tout les items des filtres/dropdown-menu
                 this.itemDropdownInvisible()
-                console.log('t ooou')
                 for (const card of array) {  
                     const cardDOM = document.getElementById(card.id)
                     if(principalSearch.value.length >= 3){
