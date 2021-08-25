@@ -9,7 +9,6 @@
     <title>Les petits plats</title>
 </head>
 <body>
-
     <main class="container">
         <header class="header">
             <div class="header-logo"><img src="img/logo.svg" alt="dessin de toque de cuisinier"> </div>
@@ -20,48 +19,31 @@
             <button class="btn btn-outline-success form-btnSubmit" type="submit"><img src="img/icon-search.png" alt=""></button>
         </form>
 
+        <div class="tags" id="tags">
+        </div>
+
         <div class="filters">
             <div class="filter filter-ingredients">
                 <input class="form-control btn btn-secondary dropdown-toggle input-filter" type="search" id="dropdownMenuIngredients" aria-label="Search" placeholder="Ingredients">
                 <div class="filter-btn"><i class="fas fa-chevron-down"></i></div>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuIngredients">
-                  <li><button class="dropdown-item" type="button">Lait de coco</button></li>
+                <ul class="dropdown-menu dropdown-ingredients" aria-labelledby="dropdownMenuIngredients">
                 </ul>
             </div>
             <div class="filter filter-appareil">
                 <input class="form-control btn btn-secondary dropdown-toggle input-filter" type="search" id="dropdownMenuAppareils" aria-label="Search" placeholder="Appareils">
                 <div class="filter-btn"><i class="fas fa-chevron-down"></i></div>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuAppareils">
-                  <li><button class="dropdown-item" type="button">Action</button></li>
-                  <li><button class="dropdown-item" type="button">Another action</button></li>
-                  <li><button class="dropdown-item" type="button">Something else here</button></li>
-                  <li><button class="dropdown-item" type="button">Action</button></li>
-                  <li><button class="dropdown-item" type="button">Another action</button></li>
-                  <li><button class="dropdown-item" type="button">Something else here</button></li>
-                  <li><button class="dropdown-item" type="button">Action</button></li>
-                  <li><button class="dropdown-item" type="button">Another action</button></li>
-                  <li><button class="dropdown-item" type="button">Something else here</button></li>
+                <ul class="dropdown-menu dropdown-appareils" aria-labelledby="dropdownMenuAppareils">
                 </ul>
             </div>
             <div class="filter filter-ustensiles">
                 <input class="form-control btn btn-secondary dropdown-toggle input-filter" type="search" id="dropdownMenuUstensiles" aria-label="Search" placeholder="Ustensiles">
                 <div class="filter-btn"><i class="fas fa-chevron-down"></i></div>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuUstensiles">
-                  <li><button class="dropdown-item" type="button">Action</button></li>
-                  <li><button class="dropdown-item" type="button">Another action</button></li>
-                  <li><button class="dropdown-item" type="button">Something else here</button></li>
-                  <li><button class="dropdown-item" type="button">Action</button></li>
-                  <li><button class="dropdown-item" type="button">Another action</button></li>
-                  <li><button class="dropdown-item" type="button">Something else here</button></li>
-                  <li><button class="dropdown-item" type="button">Action</button></li>
-                  <li><button class="dropdown-item" type="button">Another action</button></li>
-                  <li><button class="dropdown-item" type="button">Something else here</button></li>
+                <ul class="dropdown-menu dropdown-ustensiles" aria-labelledby="dropdownMenuUstensiles">
                 </ul>
             </div>
         </div>
 
-        <section class="listCard">
-
+        <section class="listCard">            
         </section>
     </main>
 

@@ -1,9 +1,15 @@
+import SearchFilter from "./SearchFilter"
+
 export default class SearchPrincipalBar {
     constructor(recipes){
         this.recipes = recipes
-        this.cardsRecipesDOM = document.querySelector(".listCard").children
         this.principalSearchBar = document.getElementById('principal-search')
-        this.search()
+        this.listCardRecipesDOM = document.querySelector('.listCard').children 
+        this.filterIngredients = document.querySelector(".filter-ingredients .dropdown-menu")
+        this.filterAppareils = document.querySelector(".filter-appareil .dropdown-menu")
+        this.filterUstensiles = document.querySelector(".filter-ustensiles .dropdown-menu")
+        this.search(this.recipes)
+        this.tabFilterTag = []
     }
 
      //A la saisie de l'utilisateur j'effectue la recherche
@@ -13,8 +19,10 @@ export default class SearchPrincipalBar {
         this.principalSearchBar.addEventListener('keyup', (e)=> {
             if(e.target.value.length >= 3 ){
                 this.activeCardsRecipes(e.target.value)
+                new SearchFilter(this.tabFilterTag)
             }else{
                 this.hiddenAllCardsRecipes()
+                new SearchFilter(this.recipes)
             }
         })
     }
@@ -24,12 +32,18 @@ export default class SearchPrincipalBar {
     //sinon je retire la class active 
     activeCardsRecipes(saisieUser){
         this.recipes.filter(recipe => {
-            console.log("ok")
+            // console.log("ok")
             if(recipe.name.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1 || recipe.description.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1 || this.verifyIngredientcontainSaisiUser(recipe.ingredients, saisieUser) == true){
+                    if(this.tabFilterTag.indexOf(recipe) == -1) {
+                        this.tabFilterTag.push(recipe)
+                    }    
                     document.getElementById(recipe.id).classList.add('active')
                     return
             }
             document.getElementById(recipe.id).classList.remove('active')
+            if(this.tabFilterTag.indexOf(recipe) !== -1) {
+                this.tabFilterTag.splice(this.tabFilterTag.findIndex(i => i === recipe), 1)
+            }
         })
     }
 

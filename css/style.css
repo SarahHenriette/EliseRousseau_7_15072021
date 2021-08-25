@@ -35,23 +35,59 @@
   border: none;
   background-color: #E7E7E7;
 }
+.container .tags {
+  margin-top: 3em;
+}
+.container .tags-tag {
+  display: none;
+  width: auto;
+  height: 37px;
+  padding: 0.5em 1em;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.container .tags-tag::after {
+  content: url("../../img/icon-close-tag.svg");
+  position: relative;
+  top: 3px;
+  left: 4px;
+}
+.container .tags-tag--ingredients {
+  background-color: #3282F7;
+}
+.container .tags-tag--appareils {
+  background-color: #68D9A4;
+}
+.container .tags-tag--ustensiles {
+  background-color: #ED6454;
+}
+.container .tags .active {
+  display: inline-block;
+}
 .container .filters {
   display: flex;
   margin-top: 3%;
 }
 .container .filters .filter {
   margin-right: 3%;
-  min-width: auto;
-  min-height: 69px;
-  width: 170px;
+  max-width: 170px;
+  height: 69px;
   display: flex;
   border-radius: 5px;
   position: relative;
+  flex-direction: column;
+  transition: max-width 0.3s ease-in-out;
 }
 .container .filters .filter input {
   background-color: transparent;
   color: white;
   border: none;
+  text-align: start;
+  min-width: 170px;
+  max-width: auto;
+  height: 69px;
+  display: block;
 }
 .container .filters .filter input::placeholder {
   color: white;
@@ -61,6 +97,39 @@
   border: none;
   box-shadow: none;
 }
+.container .filters .filter ul {
+  top: 69px;
+  position: static;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 667px;
+  background-color: transparent;
+  transition: max-width 0.3s;
+  border: none;
+}
+.container .filters .filter ul .dropdown-item {
+  width: auto;
+}
+.container .filters .filter ul .dropdown-item:active {
+  background-color: transparent;
+}
+.container .filters .filter ul .dropdown-item.active {
+  background-color: transparent;
+}
+.container .filters .filter ul li {
+  display: none;
+  min-width: 33%;
+  max-width: 100%;
+}
+.container .filters .filter ul li button {
+  color: white;
+}
+.container .filters .filter ul li button:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.container .filters .filter ul .active {
+  display: block;
+}
 .container .filters .filter-btn {
   position: absolute;
   right: 15px;
@@ -69,9 +138,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
+  height: 69px;
 }
 .container .filters .filter-btn i {
   color: white;
+  transform: rotate(0deg);
+}
+.container .filters .filter.active {
+  width: auto;
+  min-width: 250px;
+  max-width: 667px;
+  height: auto;
+  transition: max-width 0.3s ease-in-out;
+}
+.container .filters .filter.active .filter-btn {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease-in-out;
 }
 .container .filters .filter-ingredients {
   background-color: #3282F7;
@@ -116,6 +199,9 @@
 }
 .container .listCard .card-ingredients li {
   list-style-type: none;
+}
+.container .listCard .card-ingredients li .active {
+  background-color: red;
 }
 .container .listCard .card-title {
   font-size: 1.2em;

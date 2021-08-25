@@ -1,0 +1,32 @@
+.tags {
+    margin-top: 3em;
+   
+    &-tag {
+        display: none;
+        width: auto;
+        height: 37px;
+        padding: 0.5em 1em;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        &::after {
+            content: url('../../img/icon-close-tag.svg');
+            position: relative;
+            top: 3px;
+            left: 4px;
+        }
+    }
+   
+    &-tag--ingredients {
+        background-color: $blue;
+    }
+    &-tag--appareils {
+        background-color: $green;
+    }
+    &-tag--ustensiles {
+        background-color: $red;
+    }
+    .active {
+        display: inline-block;
+    }
+}
