@@ -13,12 +13,10 @@ export default class SearchFilter {
         this.addIngredients(this.tab)
         this.addAppareils(this.tab)
         this.addUstensiles(this.tab)
-        
-        
     }
 
   
-      /**
+    /**
      * ajout des ingredients dans le filtre ingrédient
      * @param {array} array - Liste des recettes
      */
@@ -34,7 +32,6 @@ export default class SearchFilter {
                     tabingredient.push(i.ingredient)
                 }
             })
-    
         })
         this.itemFonctionnality(tabingredient, this.filterIngredients, "#dropdownMenuIngredients", array, 'tags-tag--ingredients')
     }
@@ -100,7 +97,6 @@ export default class SearchFilter {
     
         //créer les tags
         tag.createTag(filterItem, className, array)
-    
     }
 
         
