@@ -171,6 +171,10 @@
   flex-wrap: wrap;
   padding-bottom: 5%;
 }
+.container .listCard--noCard {
+  margin-top: 2em;
+  display: none;
+}
 .container .listCard .card {
   display: none;
   width: 380px;

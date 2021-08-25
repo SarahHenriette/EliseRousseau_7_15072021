@@ -5,16 +5,17 @@ export default class SearchPrincipalBar {
         this.recipes = recipes
         this.principalSearchBar = document.getElementById('principal-search')
         this.listCardRecipesDOM = document.querySelector('.listCard').children 
-        this.filterIngredients = document.querySelector(".filter-ingredients .dropdown-menu")
-        this.filterAppareils = document.querySelector(".filter-appareil .dropdown-menu")
-        this.filterUstensiles = document.querySelector(".filter-ustensiles .dropdown-menu")
         this.search(this.recipes)
         this.tabFilterTag = []
     }
 
-    //a la saisie du champ 
-    //si il y a au moins 3 caractere je lance la recherche
-    //sinon je masque toutes les cards
+
+    /**
+     * a la saisie du champ 
+     * si il y a au moins 3 caractere je lance la recherche
+     * sinon je masque toutes les cards
+     * @param {array} recipes - Liste des recettes
+     */
     search(recipes){
         this.principalSearchBar.addEventListener('keyup', (e) => {
             if(e.target.value.length >= 3 ) {
@@ -27,38 +28,60 @@ export default class SearchPrincipalBar {
         })
     }
 
-    //Je divise le tableau en deux
+    /**
+     * Je divise le tableau en deux
+     * @param {array} recipes - Liste des recettes
+     * @param {string} saisieUser - Saisie de l'utilisateur
+     */
     mergeSort(array, saisieUser) {
-        // console.log("ok")
-            const middleIndex = Math.floor(array.length / 2)
-            const leftSide = array.slice(0, middleIndex)
-            const rightSide = array.slice(middleIndex)
-          
-            leftSide.filter(recipe =>  this.verifySaisiUserInRecipe(recipe, saisieUser))
-            rightSide.filter(recipe =>  this.verifySaisiUserInRecipe(recipe, saisieUser))      
+        const middleIndex = Math.floor(array.length / 2)
+        const leftSide = array.slice(0, middleIndex)
+        const rightSide = array.slice(middleIndex)
+        
+        leftSide.filter(recipe =>  this.verifySaisiUserInRecipe(recipe, saisieUser))
+        rightSide.filter(recipe =>  this.verifySaisiUserInRecipe(recipe, saisieUser))  
+        
+        const cardDOM = document.querySelector('.listCard .listCard--noCard')
+        const cardDOMactive = document.querySelectorAll('.listCard .active')
+
+        if(cardDOMactive.length === 0){
+            cardDOM.style.display = "block"
+            return
+        }
+        cardDOM.style.display = "none"
     }
 
-    //si le titre, la description ou l'un des ingredient contient la saisie utilisateur alors j'active la card grace à l'id 
-    //sinon je desactive la card grace à l'id
-    verifySaisiUserInRecipe(index, saisieUser){
-        if(index.name.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1  ||
-        index.description.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1  ||
-        this.verifySaisiUserInIngredient(index.ingredients, saisieUser) == true 
+
+    /**
+     * si le titre, la description ou l'un des ingredient contient la saisie utilisateur alors j'active la card grace à l'id 
+     * sinon je desactive la card grace à l'id
+     * @param {Object} recipe - recette
+     * @param {string} saisieUser - Saisie de l'utilisateur
+     */
+    verifySaisiUserInRecipe(recipe, saisieUser){
+        if(recipe.name.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1  ||
+        recipe.description.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1  ||
+        this.verifySaisiUserInIngredient(recipe.ingredients, saisieUser) == true 
         ) {
-            if(this.tabFilterTag.indexOf(index) == -1) {
-                this.tabFilterTag.push(index)
+            if(this.tabFilterTag.indexOf(recipe) == -1) {
+                this.tabFilterTag.push(recipe)
             }
-            document.getElementById(index.id).classList.add('active')
+            document.getElementById(recipe.id).classList.add('active')
         }else {
-            document.getElementById(index.id).classList.remove('active')
-            if(this.tabFilterTag.indexOf(index) !== -1) {
-                this.tabFilterTag.splice(this.tabFilterTag.findIndex(i => i === index), 1)
+            document.getElementById(recipe.id).classList.remove('active')
+            if(this.tabFilterTag.indexOf(recipe) !== -1) {
+                this.tabFilterTag.splice(this.tabFilterTag.findIndex(i => i === recipe), 1)
             }
-    
         }
+       
     }
 
     //verifie si la liste des ingredients des recettes contient la saisie utilisateur
+    /**
+     * verifie si la liste des ingredients des recettes contient la saisie utilisateur
+     * @param {arrray} tabIngredient - liste des ingredients d'une recette
+     * @param {string} saisieUser - Saisie de l'utilisateur
+     */
     verifySaisiUserInIngredient (tabIngredient, saisieUser) {
         let value
         tabIngredient.forEach(i => {
@@ -74,9 +97,5 @@ export default class SearchPrincipalBar {
         for (const i of this.listCardRecipesDOM) {
             i.classList.remove("active")
         }
-        // this.filterIngredients.innerHTML = ""
-        // this.filterAppareils.innerHTML = ""
-        // this.filterUstensiles.innerHTML = ""
     }
-    
 }
