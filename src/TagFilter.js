@@ -78,7 +78,8 @@ export default class TagFilter {
         const cardDOMactive = document.querySelectorAll('.listCard .active')
         for (const card of array) { 
             const cardDOM = document.getElementById(card.id)
-            for (const tag of document.querySelector('.tags').children) {
+            const tags = document.querySelector('.tags').children
+            for (const tag of tags) {
                 const valueTag = tag.innerHTML.replace(/ /g, "-")
 
                 if(cardDOMactive.length > 0) {
