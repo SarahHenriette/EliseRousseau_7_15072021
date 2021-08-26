@@ -37,7 +37,6 @@ export default class SearchPrincipalBar {
      */
     activeCardsRecipes(saisieUser){
         this.recipes.filter(recipe => {
-            // console.log("ok")
             if(recipe.name.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1 || recipe.description.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1 || this.verifyIngredientcontainSaisiUser(recipe.ingredients, saisieUser) == true){
                     if(this.tabFilterTag.indexOf(recipe) == -1) {
                         this.tabFilterTag.push(recipe)
@@ -55,7 +54,6 @@ export default class SearchPrincipalBar {
         const cardDOMactive = document.querySelectorAll('.listCard .active')
 
         if(cardDOMactive.length === 0){
-            console.log(cardDOM)
             cardDOM.style.display = "block"
             return
         }
