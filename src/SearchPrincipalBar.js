@@ -37,7 +37,9 @@ export default class SearchPrincipalBar {
      */
     activeCardsRecipes(saisieUser){
         this.recipes.filter(recipe => {
-            if(recipe.name.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1 || recipe.description.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1 || this.verifyIngredientcontainSaisiUser(recipe.ingredients, saisieUser) == true){
+            if(recipe.name.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1 || 
+            recipe.description.toLowerCase().indexOf(saisieUser.toLowerCase()) !== -1 || 
+            this.verifyIngredientcontainSaisiUser(recipe.ingredients, saisieUser) == true){
                     if(this.tabFilterTag.indexOf(recipe) == -1) {
                         this.tabFilterTag.push(recipe)
                     }    
