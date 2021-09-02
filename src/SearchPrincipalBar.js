@@ -7,6 +7,7 @@ export default class SearchPrincipalBar {
         this.listCardRecipesDOM = document.querySelector('.listCard').children 
         this.search(this.recipes)
         this.tabFilterTag = []
+        this.arrayContainArraysTenElements = []
     }
 
 
@@ -14,12 +15,11 @@ export default class SearchPrincipalBar {
      * a la saisie du champ 
      * si il y a au moins 3 caractere je lance la recherche
      * sinon je masque toutes les cards
-     * @param {array} recipes - Liste des recettes
      */
-    search(recipes){
+    search(array){
         this.principalSearchBar.addEventListener('keyup', (e) => {
             if(e.target.value.length >= 3 ) {
-                this.mergeSort(recipes, e.target.value)
+                this.mergeSort(array, e.target.value)
                 new SearchFilter(this.tabFilterTag)
             } else {
                 this.hidenCardsRecipes()
@@ -28,7 +28,7 @@ export default class SearchPrincipalBar {
         })
     }
 
-    /**
+     /**
      * Je divise le tableau en deux
      * @param {array} recipes - Liste des recettes
      * @param {string} saisieUser - Saisie de l'utilisateur
@@ -92,8 +92,8 @@ export default class SearchPrincipalBar {
         return value
     }
 
-     //cache les cards des recettes
-     hidenCardsRecipes() {
+    //cache les cards des recettes
+    hidenCardsRecipes() {
         for (const i of this.listCardRecipesDOM) {
             i.classList.remove("active")
         }
