@@ -20,13 +20,17 @@ export default class TagFilter {
                 //je crée le tag
                 document.querySelector('.tags').innerHTML += `
                 <span class="tags-tag ${className} ${e.target.innerHTML.replace(/ /g, "-")} active">${e.target.innerHTML}</span>
-                ` 
+                `                 
                 //items dropdown invisible
                 this.itemDropdownInvisible()
 
                 this.verifyTagInCards(array)
 
                 this.itemDropdownVisible()
+                const tags = document.querySelector('.tags').children
+                for (const tag of tags) {
+                    document.getElementById(tag.innerHTML.replace(/ /g, "")).parentElement.classList.remove('active')
+                }
 
                 this.close(array) 
                 
@@ -115,6 +119,7 @@ export default class TagFilter {
                         cardDOM.classList.add('active')
                         for (const tag of tags) {
                             const valueTag = tag.innerHTML.replace(/ /g, "-")
+                            
                             if(!cardDOM.querySelector(`.${valueTag}`)){
                                 cardDOM.classList.remove('active')
                             }
@@ -132,6 +137,9 @@ export default class TagFilter {
                 }
                 //je rend visible les items des dropdown liée aux cards actives
                 this.itemDropdownVisible()
+                for (const tag of tags) {
+                    document.getElementById(tag.innerHTML.replace(/ /g, "")).parentElement.classList.remove('active')
+                }
             })
         }
     }

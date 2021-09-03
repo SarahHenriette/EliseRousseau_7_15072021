@@ -41,14 +41,6 @@ export default class SearchPrincipalBar {
         leftSide.filter(recipe =>  this.verifySaisiUserInRecipe(recipe, saisieUser))
         rightSide.filter(recipe =>  this.verifySaisiUserInRecipe(recipe, saisieUser))  
         
-        const cardDOM = document.querySelector('.listCard .listCard--noCard')
-        const cardDOMactive = document.querySelectorAll('.listCard .active')
-
-        if(cardDOMactive.length === 0){
-            cardDOM.style.display = "block"
-            return
-        }
-        cardDOM.style.display = "none"
     }
 
 
