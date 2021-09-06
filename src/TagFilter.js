@@ -31,9 +31,7 @@ export default class TagFilter {
                 for (const tag of tags) {
                     document.getElementById(tag.innerHTML.replace(/ /g, "")).parentElement.classList.remove('active')
                 }
-
                 this.close(array) 
-                
             })
         });
     }

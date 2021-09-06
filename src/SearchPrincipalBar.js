@@ -40,7 +40,6 @@ export default class SearchPrincipalBar {
         
         leftSide.filter(recipe =>  this.verifySaisiUserInRecipe(recipe, saisieUser))
         rightSide.filter(recipe =>  this.verifySaisiUserInRecipe(recipe, saisieUser))  
-        
     }
 
 
