@@ -26,9 +26,8 @@ export default class SearchPrincipalBar {
             }
         })
     }
-    
   
-      /**
+    /**
      * je vérifie dans le tableau JSON si l'une des recettes contient la saisie de l'utilisateur
      * si oui alors grâce à l'index je recupere la card correspondant à la recette et j'ajoute la class active
      * sinon je retire la class active 
@@ -51,15 +50,6 @@ export default class SearchPrincipalBar {
                 this.tabFilterTag.splice(this.tabFilterTag.findIndex(i => i === recipe), 1)
             }
         })
-
-        const cardDOM = document.querySelector('.listCard .listCard--noCard')
-        const cardDOMactive = document.querySelectorAll('.listCard .active')
-
-        if(cardDOMactive.length === 0){
-            cardDOM.style.display = "block"
-            return
-        }
-        cardDOM.style.display = "none"
     }
 
     /**
