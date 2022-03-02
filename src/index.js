@@ -1,4 +1,4 @@
-  import recipes from "./../recipes"
+import recipes from "./../recipes"
 import CreateCardRecipe from "./CreateCardRecipe"
 import SearchPrincipalBar from "./SearchPrincipalBar"
 import SearchFilter from "./SearchFilter"

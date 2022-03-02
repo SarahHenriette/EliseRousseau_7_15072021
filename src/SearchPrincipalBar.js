@@ -64,7 +64,6 @@ export default class SearchPrincipalBar {
                 this.tabFilterTag.splice(this.tabFilterTag.findIndex(i => i === recipe), 1)
             }
         }
-       
     }
 
     //verifie si la liste des ingredients des recettes contient la saisie utilisateur

@@ -73,7 +73,7 @@ export default class TagFilter {
     }
 
     /**
-     * verifie si les cards qui contiennent le tag et les affichent
+     * verifie si les cards qui contiennent le tag, si oui alors je les affichent
      * @param {array} array - liste des recettes
      */
     verifyTagInCards(array) {
