@@ -32,6 +32,7 @@ Lancez l'application :
 ```
 $ npm start
 ```
+Puis allez à l'adresse : `http://127.0.0.1:3000/`
 
 Vous pouvez maintenant faire une recherche de recette sois en utilisant la barre de recherche principale ou en utilisant les filtres
 
