@@ -19,5 +19,3 @@ Le but de ce projet a été de réfléchir au développement de deux algorithmes
 - Javascript
 - HTML
 - SASS
-
-# Démo :
