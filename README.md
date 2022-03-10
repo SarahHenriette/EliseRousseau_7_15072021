@@ -7,7 +7,7 @@ Le but de ce projet a été de réfléchir au développement de deux algorithmes
   * main : branche principale 
   * algorithm_1 : branche ou se trouve le premier algo
   * algorithm_2 : branche ou se trouve le deuxième algo
-Pour faire fonctionner l'application restez soit sur la branche "algorithm_1" ou "algorithm_2"
+- Pour faire fonctionner l'application restez soit sur la branche "algorithm_1" ou "algorithm_2"
 - une fois sur la branche "algorithm_1" ou "algorithm_2, utilisez la commande "npm start" pour lancer l'application 
 - Vous pouvez maintenant faire une recherche de recette sois en utilisant la barre de recherche principale ou en utilisant les filtres 
 
