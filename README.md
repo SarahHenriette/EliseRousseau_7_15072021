@@ -17,11 +17,6 @@ Installez les packages npm (décrits dans `package.json`) :
 $ npm install
 ```
 
-Ce projet possède 3 branches :
-  1. main : branche principale 
-  2. algorithm_1 : branche ou se trouve le premier algo
-  3. algorithm_2 : branche ou se trouve le deuxième algo
-
 Pour faire fonctionner l'application 
 Allez soit sur 
 ```
